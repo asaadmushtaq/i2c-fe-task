@@ -8,33 +8,69 @@ function SearchPage() {
   const [tableData, setTableData] = useState([]);
   const [fetchingData, setFetchingData] = useState(false);
 
-  const bookmarkRepo = (record) => {
-    let updatedBookmarkedRepos = [];
+  const bookmarkRepo = (record, action) => {
+    if (action === "forward") {
+      let updatedBookmarkedRepos = [];
 
-    const bookmarkedReposExist = localStorage.getItem("bookmarkedRepos");
+      const bookmarkedReposExist = localStorage.getItem("bookmarkedRepos");
 
-    if (bookmarkedReposExist) {
-      const bookmarkedRepos = JSON.parse(bookmarkedReposExist);
-      const alreadyBookmarked = bookmarkedRepos.some(
-        (bookmarkedRepo) =>
-          bookmarkedRepo.name === record.name &&
-          bookmarkedRepo.owner === record.owner
-      );
+      if (bookmarkedReposExist) {
+        const bookmarkedRepos = JSON.parse(bookmarkedReposExist);
+        const alreadyBookmarked = bookmarkedRepos.some(
+          (bookmarkedRepo) =>
+            bookmarkedRepo.name === record.name &&
+            bookmarkedRepo.owner === record.owner
+        );
 
-      if (!alreadyBookmarked) {
-        updatedBookmarkedRepos = [record, ...bookmarkedRepos];
+        if (!alreadyBookmarked) {
+          updatedBookmarkedRepos = [record, ...bookmarkedRepos];
+          updateTableAfterAction(record);
+          localStorage.setItem(
+            "bookmarkedRepos",
+            JSON.stringify(updatedBookmarkedRepos)
+          );
+        }
+      } else {
+        updatedBookmarkedRepos = [record];
+        updateTableAfterAction(record);
         localStorage.setItem(
           "bookmarkedRepos",
           JSON.stringify(updatedBookmarkedRepos)
         );
       }
     } else {
-      updatedBookmarkedRepos = [record];
-      localStorage.setItem(
-        "bookmarkedRepos",
-        JSON.stringify(updatedBookmarkedRepos)
-      );
+      const bookmarkedReposExist = localStorage.getItem("bookmarkedRepos");
+      let updatedBookmarks = [];
+      if (bookmarkedReposExist) {
+        const bookmarkedRepos = JSON.parse(bookmarkedReposExist);
+
+        console.log(bookmarkedRepos);
+        console.log(record);
+
+        updatedBookmarks = bookmarkedRepos.filter(
+          (bookmarkedRepo) =>
+            bookmarkedRepo.name !== record.name ||
+            bookmarkedRepo.owner !== record.owner
+        );
+      }
+
+      console.log(updatedBookmarks);
+      updateTableAfterAction(record);
+      localStorage.setItem("bookmarkedRepos", JSON.stringify(updatedBookmarks));
     }
+  };
+
+  const updateTableAfterAction = (record) => {
+    const oldTableData = tableData;
+
+    const updatedTableData = oldTableData.map((row) => {
+      if (row.name === record.name && row.owner === record.owner) {
+        return record; // Update the object that matches the criteria
+      }
+      return row; // Keep other objects unchanged
+    });
+
+    setTableData(updatedTableData);
   };
 
   const searchRepos = async (query) => {
@@ -91,13 +127,31 @@ function SearchPage() {
     {
       title: "Action",
       key: "action",
-      render: (_, record) => (
-        <Space size="middle">
-          <button className="bookmark" onClick={() => bookmarkRepo(record)}>
-            Bookmark
-          </button>
-        </Space>
-      ),
+      render: (_, record) => {
+        const bookmarkedReposExist = localStorage.getItem("bookmarkedRepos");
+        let alreadyBookmarked = false;
+        if (bookmarkedReposExist) {
+          const bookmarkedRepos = JSON.parse(bookmarkedReposExist);
+          alreadyBookmarked = bookmarkedRepos.some(
+            (bookmarkedRepo) =>
+              bookmarkedRepo.name === record.name &&
+              bookmarkedRepo.owner === record.owner
+          );
+        }
+
+        return (
+          <Space size="middle">
+            <button
+              className="bookmark"
+              onClick={() =>
+                bookmarkRepo(record, alreadyBookmarked ? "reverse" : "forward")
+              }
+            >
+              {alreadyBookmarked ? "Un-Bookmark" : "Bookmark"}
+            </button>
+          </Space>
+        );
+      },
     },
   ];
 

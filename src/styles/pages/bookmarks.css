@@ -1,0 +1,65 @@
+.bookmarks .header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: left;
+  height: 50px;
+}
+
+.bookmarks .header .title {
+  margin: 0px;
+}
+
+.bookmarks .header .subtitle {
+  margin: 0px;
+  color: grey;
+}
+
+.body {
+  margin-top: 30px;
+}
+
+.github-card {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 5px;
+  height: 200px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.github-card .card-top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.card-top .text-left {
+  width: 300px;
+}
+
+.card-top .text-left p {
+  margin-top: 5px;
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+.github-card .card-bottom {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.github-card .stars {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.github-card .card-bottom p {
+  margin-left: 5px;
+}

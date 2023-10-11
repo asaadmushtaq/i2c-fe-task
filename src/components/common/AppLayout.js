@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -12,11 +12,23 @@ import Logo from "../../assets/images/i2c_logo.png";
 const { Header, Sider, Content } = Layout;
 
 function AppLayout({ children }) {
+  const location = useLocation();
   const navigate = useNavigate();
+  const [defaultSelectedKey, setDefaultSelectedKey] = useState("");
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
+  useEffect(() => {
+    console.log(location);
+
+    if (location.pathname === "/bookmarks") {
+      setDefaultSelectedKey("bookmarks");
+    } else {
+      setDefaultSelectedKey("search");
+    }
+  }, [location, location.pathname]);
 
   return (
     <Layout className="layout">
@@ -27,16 +39,17 @@ function AppLayout({ children }) {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={["1"]}
+          selectedKeys={[defaultSelectedKey]}
+          defaultSelectedKeys={[defaultSelectedKey]}
           items={[
             {
-              key: "1",
+              key: "search",
               icon: <SearchOutlined />,
               label: "Search",
               onClick: () => navigate("/search"),
             },
             {
-              key: "2",
+              key: "bookmarks",
               icon: <BookOutlined />,
               label: "Bookmarks",
               onClick: () => navigate("/bookmarks"),

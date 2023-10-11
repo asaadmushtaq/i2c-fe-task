@@ -16,6 +16,7 @@
 }
 
 .bookmark {
+  width: 150px;
   background-color: rgb(18, 109, 255);
   border: none;
   border-radius: 5px;
