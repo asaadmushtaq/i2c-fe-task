@@ -1,0 +1,15 @@
+.layout {
+  height: 100vh;
+}
+
+.layout-logo {
+  color: white;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.layout-logo img {
+  width: 70px;
+}
