@@ -1,0 +1,29 @@
+.search .header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: left;
+  height: 50px;
+}
+
+.search .header .title {
+  margin: 0px;
+}
+
+.search .header .subtitle {
+  margin: 0px;
+  color: grey;
+}
+
+.bookmark {
+  background-color: rgb(18, 109, 255);
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.bookmark:hover {
+  background-color: rgb(86, 151, 255);
+}
