@@ -2,6 +2,14 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+How to run: 
+
+1. Clone the project on cmd by using "git clone https://github.com/asaadmushtaq/i2c-fe-task.git
+2. Open project on VSCode 
+3. Open Terminal Ctrl + `
+4. Install Node Modules by entering npm install
+5. After install, run the project by entering npm run
+
 ## Available Scripts
 
 In the project directory, you can run:

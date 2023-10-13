@@ -28,3 +28,7 @@
 .bookmark:hover {
   background-color: rgb(86, 151, 255);
 }
+
+.table {
+  margin-top: 15px;
+}

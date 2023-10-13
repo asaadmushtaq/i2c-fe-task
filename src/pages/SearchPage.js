@@ -97,8 +97,8 @@ function SearchPage() {
           const repositories = res.data.items;
           if (repositories.length === 0) {
             notification.error({
-              message: "API Error",
-              description: "There was an error while making the API call.",
+              message: "No Repository Found",
+              description: "There is no repository found by this name.",
             });
           }
           console.log(repositories);
@@ -197,7 +197,6 @@ function SearchPage() {
         </div>
         <div className="table">
           <Table
-            // style={{ height: "calc(100vh-10rem)" }}
             scroll={{ y: "calc(100vh - 25rem", x: "fit-content" }}
             loading={fetchingData}
             columns={columns}
