@@ -32,7 +32,14 @@ function AppLayout({ children }) {
 
   return (
     <Layout className="layout">
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      <Sider
+        onBreakpoint={(e) => setCollapsed(e)}
+        breakpoint="md"
+        trigger={null}
+        collapsedWidth={"0"}
+        collapsible
+        collapsed={collapsed}
+      >
         <div className="layout-logo">
           <img src={Logo} alt="Logo" />
         </div>

@@ -19,14 +19,14 @@ function Bookmarks() {
   return (
     <div className="bookmarks">
       <div className="header">
-        <h2 className="title">Bookmarked Repos</h2>
-        <p className="subtitle">List of bookmarked repos</p>
+        <h2 className="title">Bookmarked Repositories</h2>
+        <p className="subtitle">List of Bookmarked Repositories</p>
       </div>
       <hr />
       <div className="body">
         <Row gutter={[16, 24]}>
           {bookmarkedRepos?.map((bookmarkedRepo, index) => (
-            <Col span={6} key={index}>
+            <Col xs={24} sm={24} md={12} lg={8} key={index}>
               <GithubCard
                 name={bookmarkedRepo.name}
                 description={bookmarkedRepo.description}
